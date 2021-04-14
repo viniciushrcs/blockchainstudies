@@ -32,7 +32,7 @@ contract Tracking {
 	address public store;
 
 	//Contract creation
-	constructor(address _supplier, address _factory, address _store) {
+	constructor(address _supplier, address _factory, address _store) public {
 		supplier = _supplier;
 		factory = _factory;
 		store = _store;
@@ -41,7 +41,7 @@ contract Tracking {
 	//public é um modificador, para controlar acesso.
 	function next() public {
  	  if (currentStep == Step.Supplier) {
- 	  	if(msg.sender != supplier) revert("User not allowed")
+ 	  	if(msg.sender != supplier) revert("User not allowed");
  	  	supplierState++;
  	    if (supplierState == Finished) {
  	    	currentStep = Step.SupplierToFactory;
@@ -49,7 +49,7 @@ contract Tracking {
  	    return;
  	  }
  	  if (currentStep == Step.SupplierToFactory) {
- 	  	if(msg.sender != supplier) revert("User not allowed")
+ 	  	if(msg.sender != supplier) revert("User not allowed");
  	  	supplierToFactoryState++;
  	  	if (supplierToFactoryState == Finished) {
  	  		currentStep = Step.Factory;
@@ -57,7 +57,7 @@ contract Tracking {
  	  	return;
  	  }
  	   if (currentStep == Step.Factory) {
- 	  	if(msg.sender != factory) revert("User not allowed")
+ 	  	if(msg.sender != factory) revert("User not allowed");
  	  	factoryState++;
  	  	if (factoryState == Finished) {
  	  		currentStep = Step.FactoryToStore;
@@ -65,7 +65,7 @@ contract Tracking {
  	  	return;
  	  }
  	   if (currentStep == Step.FactoryToStore) {
- 	  	if(msg.sender != factory) revert("User not allowed")
+ 	  	if(msg.sender != factory) revert("User not allowed");
  	  	factoryToStoreState++;
  	  	if (factoryToStoreState == Finished) {
  	  		currentStep = Step.StoreVerification;
@@ -73,7 +73,7 @@ contract Tracking {
  	  	return;
  	  }
  	   if (currentStep == Step.StoreVerification) {
- 	  	if(msg.sender != store) revert("User not allowed")
+ 	  	if(msg.sender != store) revert("User not allowed");
  	  	if (storeVerificationState == Finished) {
  	  		//Revert é uma forma de encerrar o código e lançar um erro para o usuário
  	  		revert("Process is already finished");

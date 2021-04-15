@@ -38,7 +38,7 @@ contract Tracking {
 		store = _store;
 	}
 
-	//public é um modificador, para controlar acesso.
+	//public é um modificador, para controlar acesso à determinada variável
 	function next() public {
  	  if (currentStep == Step.Supplier) {
  	  	if(msg.sender != supplier) revert("User not allowed");

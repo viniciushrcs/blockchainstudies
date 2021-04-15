@@ -19,6 +19,8 @@ contract TrackingAndPayment is Tracking {
 	uint256 public factoryBalance;
 
 	constructor(address payable _supplier, address payable _factory, address _store) Tracking(_supplier, _factory, _store) public {
+		supplier = _supplier;
+		factory = _factory;
 	}
 
 	//Metodo para depósitos
@@ -46,9 +48,11 @@ contract TrackingAndPayment is Tracking {
 	function pay() payable public {
 		if(factoryState == Finished && supplierBalance > 0) {
 			supplier.transfer(supplierBalance);
+			supplierBalance = 0;
 		}
 		if(storeVerificationState == Finished && factoryBalance > 0) {
 			factory.transfer(factoryBalance);
+			factoryBalance = 0;
 		}
 	}
 }

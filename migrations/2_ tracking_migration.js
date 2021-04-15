@@ -1,5 +1,5 @@
 const TrackingAndPayment = artifacts.require("TrackingAndPayment");
 
 module.exports = function (deployer) {
-  deployer.deploy(TrackingAndPayment, "0x553B0E50955a3bd0356165980fF82F5A4cb029d9", "0x5d663ccFC3AA02C2F03Ed6Fa55eb5aDd809ff6d0", "0x4491297Ef5060665CD08138f7e12588D32F7Ba0E");
+  deployer.deploy(TrackingAndPayment, "0x541035d3d8Df867a1736509A6909e9E54F0Ad8F0", "0x81b7BDE6789e7E5F6D2BcD31E709d46779905F6e", "0x8892de86313f8B454f71c5d4a72d24d40BF3C8C2");
 };

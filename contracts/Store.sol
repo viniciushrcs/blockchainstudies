@@ -8,7 +8,7 @@ contract Store {
 
 	//Variáveis de controle da loja
 	uint256 public price;
-	uint256 public stock;
+	uint64 public stock;
 
 	//Controle de pontos
 	mapping(address => uint256) points;
@@ -19,7 +19,7 @@ contract Store {
 	event NewSale(address indexed _buyer, uint256 _points);
 	event ChangeReceipt(address indexed _buyer, uint256 _change);
 
-	constructor(uint256 _stock, uint256 _price) public {
+	constructor(uint64 _stock, uint256 _price) public {
 		owner = msg.sender;
 		stock = _stock;
 		price = _price;
@@ -37,7 +37,7 @@ contract Store {
 
 		owner.transfer(msg.value-change);
 
-		uint256 reward = msg.value/price;
+		uint64 reward = uint64(msg.value/price);
 
 		if(points[msg.sender] == 0) buyers.push(msg.sender);
 		points[msg.sender] += reward;
@@ -45,7 +45,7 @@ contract Store {
 		emit NewSale(msg.sender, reward);
 
 		//Type cast - setar o int do valor, pois o reward é diferente do stock.
-		stock -= uint64(reward);
+		stock -= reward;
 	}
 
 	//view é um método de leitura, não escreve no contrato. Não gera custos.

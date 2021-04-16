@@ -30,6 +30,7 @@ contract Store {
 		require(msg.value >= price, "Value does not afford price.");
 
 		uint256 change = msg.value%price;
+
 		if(change > 0) {
 			msg.sender.transfer(change);
 			emit ChangeReceipt(msg.sender, change);

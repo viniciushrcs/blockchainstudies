@@ -32,5 +32,19 @@ contract("Store", async accounts => {
 
 			assert.equal( (await instance.stock.call()).toNumber(), stock-3, "Final stock is invalid")
 		})
+		it("should return change to buyer", async () => {
+			const instance = await Store.deployed();
+
+			const buyer = "0xdc4B4a093e3668A54eF2E64F7D3eCFd894D16D23";
+			const price = await instance.price.call();
+
+			const receipt = await instance.buy({ from: buyer, value: price*1.5 });
+
+			const change = receipt.logs[0].args._change.toNumber();
+
+			assert.equal( receipt.logs[0].event, "ChangeReceipt", "Event should be triggered");
+			assert.equal( change, price/2, "Change is not correct");
+
+		})
 	})
 })
